@@ -24,6 +24,11 @@ func sendMessage(webhookURL string, newMessage webhookstructs.SlackWebhookMessag
 		return err
 	}
 
+	// Detect Pushover basic_webhook URL
+	if strings.Contains(webhookURL, "pushover.net") {
+		return sendPushoverMessage(webhookURL, newMessage)
+	}
+
 	// Unsupported basic_webhook type
-	return errors.New("unsupported basic_webhook type: currently only Slack and Discord are supported")
+	return errors.New("unsupported basic_webhook type: currently only Slack, Discord, and Pushover are supported")
 }
