@@ -3,8 +3,5 @@
   "exclude_c2_profiles": false,
   "exclude_documentation_payload": false,
   "exclude_documentation_c2": false,
-  "exclude_agent_icons": false,
-  "remote_images": {
-    "basic_webhook": "ghcr.io/mythicc2profiles/basic_webhook:v0.0.13"
-  }
+  "exclude_agent_icons": false
 }
