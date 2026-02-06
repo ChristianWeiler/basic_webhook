@@ -2,3 +2,6 @@ __pycache__/
 .DS_Store
 main
 .idea/
+
+CLAUDE.md
+.claude/
