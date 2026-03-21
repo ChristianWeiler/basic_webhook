@@ -3,6 +3,7 @@ package my_webhooks
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/MythicMeta/MythicContainer/logging"
 	"github.com/MythicMeta/MythicContainer/mythicrpc"
@@ -61,19 +62,26 @@ func newCallbackWebhook(input webhookstructs.NewCallbackWebookMessage) {
 		fieldsBlockStarter = append(fieldsBlockStarter,
 			webhookstructs.SlackWebhookMessageAttachmentBlockText{
 				Type: "mrkdwn",
-				Text: fmt.Sprintf("*IP*\n%s", input.Data.IPs),
+				Text: fmt.Sprintf("*Internal IPs*\n%s", input.Data.IPs),
 			})
 	} else if len(ipArray) > 0 {
 		fieldsBlockStarter = append(fieldsBlockStarter,
 			webhookstructs.SlackWebhookMessageAttachmentBlockText{
 				Type: "mrkdwn",
-				Text: fmt.Sprintf("*IP*\n%s", ipArray[0]),
+				Text: fmt.Sprintf("*Internal IPs*\n%s", strings.Join(ipArray, ", ")),
 			})
 	} else {
 		fieldsBlockStarter = append(fieldsBlockStarter,
 			webhookstructs.SlackWebhookMessageAttachmentBlockText{
 				Type: "mrkdwn",
-				Text: fmt.Sprintf("*IP*\n%s", input.Data.IPs),
+				Text: fmt.Sprintf("*Internal IPs*\n%s", input.Data.IPs),
+			})
+	}
+	if input.Data.ExternalIP != "" {
+		fieldsBlockStarter = append(fieldsBlockStarter,
+			webhookstructs.SlackWebhookMessageAttachmentBlockText{
+				Type: "mrkdwn",
+				Text: fmt.Sprintf("*External IP*\n%s", input.Data.ExternalIP),
 			})
 	}
 
